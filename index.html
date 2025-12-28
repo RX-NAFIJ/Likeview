@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TERMINAL ACCESS - RX_NAFIJ</title>
+    <style>
+        body {
+            background-color: black;
+            color: #00FF00;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Scanline effect background */
+        body::before {
+            content: " ";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .login-box {
+            border: 2px solid #FF0000;
+            padding: 40px;
+            background: rgba(0, 15, 0, 0.95);
+            box-shadow: 0 0 30px #FF0000, inset 0 0 15px #000;
+            text-align: center;
+            width: 350px;
+            border-radius: 25px;
+            margin: 10px; /* বড় বক্সের মারজিন ১০ করে দেওয়া হলো */
+            z-index: 20;
+            position: relative;
+        }
+
+        .dev-name {
+            color: #00FF00;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+            text-shadow: 0 0 8px #00FF00;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            color: #FF0000;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-top: 0;
+            margin-bottom: 30px;
+            animation: blink 1.2s infinite;
+            font-size: 22px;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            background: #000;
+            border: 1px solid #00FF00;
+            color: #00FF00;
+            outline: none;
+            box-sizing: border-box;
+            border-radius: 25px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        input:focus {
+            border: 1px solid #FF0000;
+            box-shadow: 0 0 12px #FF0000;
+        }
+
+        .login-btn {
+            background: #FF0000;
+            color: white;
+            border: none;
+            padding: 14px;
+            margin-top: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            width: 70%;
+            border-radius: 25px;
+            transition: 0.4s;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 0 #800000;
+        }
+
+        .login-btn:hover {
+            background: #00FF00;
+            color: black;
+            box-shadow: 0 0 25px #00FF00;
+            transform: translateY(-2px);
+        }
+
+        #error-msg {
+            color: #FF0000;
+            font-size: 11px;
+            margin-top: 15px;
+            display: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-box">
+        <span class="dev-name">DEVELOPER : RX_NAFIJ</span>
+        <h2>SYSTEM LOGIN</h2>
+        
+        <input type="text" id="username" placeholder="USERNAME" autocomplete="off">
+        <input type="password" id="password" placeholder="PASSWORD">
+        
+        <button onclick="checkAccess()" class="login-btn">LOGIN</button>
+        
+        <div id="error-msg">[!] SECURITY BREACH: UNAUTHORIZED USER [!]</div>
+    </div>
+
+    <script>
+        function checkAccess() {
+            var user = document.getElementById("username").value;
+            var pass = document.getElementById("password").value;
+
+            if (user === "RX" && pass === "NAFIJ") {
+                alert("ACCESS GRANTED! REDIRECTING TO CORE SERVER...");
+                window.location.href = "https://zefoy.com/";
+            } else {
+                document.getElementById("error-msg").style.display = "block";
+                alert("ACCESS DENIED! WRONG CREDENTIALS.");
+            }
+        }
+    </script>
+
+</body>
+</html>
