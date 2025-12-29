@@ -17,7 +17,7 @@
             overflow: hidden;
         }
 
-        /* Scanline effect background */
+        /* ব্যাকগ্রাউন্ড স্ক্যানলাইন ইফেক্ট */
         body::before {
             content: " ";
             position: absolute;
@@ -31,6 +31,23 @@
             z-index: 1;
         }
 
+        /* লাইভ টার্গেট কাউন্টার ডিজাইন (সবুজ কালার) */
+        #visitor-counter {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #00FF00; /* সবুজ কালার করা হয়েছে */
+            font-size: 16px;
+            font-weight: bold;
+            border: 1px solid #FF0000; /* বর্ডার লাল রাখা হয়েছে হাইলাইটের জন্য */
+            padding: 8px 20px;
+            border-radius: 25px;
+            text-shadow: 0 0 10px #00FF00; /* সবুজ গ্লো */
+            z-index: 30;
+            background: rgba(0, 0, 0, 0.7);
+            letter-spacing: 1px;
+        }
+
         .login-box {
             border: 2px solid #FF0000;
             padding: 40px;
@@ -39,7 +56,7 @@
             text-align: center;
             width: 350px;
             border-radius: 25px;
-            margin: 10px; /* বড় বক্সের মারজিন ১০ করে দেওয়া হলো */
+            margin: 10px; 
             z-index: 20;
             position: relative;
         }
@@ -48,26 +65,27 @@
             color: #00FF00;
             font-size: 14px;
             font-weight: bold;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             display: block;
             text-shadow: 0 0 8px #00FF00;
-            letter-spacing: 2px;
         }
 
         h2 {
             color: #FF0000;
             text-transform: uppercase;
             letter-spacing: 4px;
-            margin-top: 0;
-            margin-bottom: 30px;
-            animation: blink 1.2s infinite;
-            font-size: 22px;
+            margin-bottom: 5px;
+            animation: blink 1.5s infinite;
         }
 
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0.2; }
-            100% { opacity: 1; }
+        .sub-title {
+            color: #00FF00;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            display: block;
         }
 
         input {
@@ -81,7 +99,6 @@
             box-sizing: border-box;
             border-radius: 25px;
             text-align: center;
-            font-size: 14px;
         }
 
         input:focus {
@@ -94,63 +111,74 @@
             color: white;
             border: none;
             padding: 14px;
-            margin-top: 25px;
+            margin-top: 20px;
             cursor: pointer;
             font-weight: bold;
             text-transform: uppercase;
             width: 70%;
             border-radius: 25px;
             transition: 0.4s;
-            letter-spacing: 2px;
-            box-shadow: 0 4px 0 #800000;
         }
 
         .login-btn:hover {
             background: #00FF00;
             color: black;
             box-shadow: 0 0 25px #00FF00;
-            transform: translateY(-2px);
         }
 
-        #error-msg {
-            color: #FF0000;
-            font-size: 11px;
-            margin-top: 15px;
-            display: none;
-            font-weight: bold;
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
         }
     </style>
 </head>
 <body>
 
+    <div id="visitor-counter">LIVE TARGETS: <span id="count">00</span></div>
+
     <div class="login-box">
         <span class="dev-name">DEVELOPER : RX_NAFIJ</span>
         <h2>SYSTEM LOGIN</h2>
-        <span class="sub-title">RX FREE LIKE & VIEW..!</span>
+        <span class="sub-title">RX CAMERA HACK</span>
         
         <input type="text" id="username" placeholder="USERNAME" autocomplete="off">
         <input type="password" id="password" placeholder="PASSWORD">
         
         <button onclick="checkAccess()" class="login-btn">LOGIN</button>
-        
-        <div id="error-msg">[!] SECURITY BREACH: UNAUTHORIZED USER [!]</div>
     </div>
 
     <script>
+        function getVisitorCount() {
+            // Vercel-এ হোস্ট করার জন্য ইউনিক আইডি
+            const site_id = "rx_camera_hack_unique_99"; 
+            
+            fetch(`https://api.countapi.xyz/hit/${site_id}/visits`)
+                .then(res => res.json())
+                .then(res => {
+                    let finalCount = res.value < 10 ? "0" + res.value : res.value;
+                    document.getElementById('count').innerText = finalCount;
+                })
+                .catch(err => {
+                    // লোড না হলে বা প্রথমবার ০ দেখালে ব্যাকআপ
+                    document.getElementById('count').innerText = "01";
+                });
+        }
+
+        window.onload = getVisitorCount;
+
         function checkAccess() {
             var user = document.getElementById("username").value;
             var pass = document.getElementById("password").value;
 
             if (user === "RX" && pass === "NAFIJ") {
-                alert("ACCESS GRANTED! REDIRECTING TO CORE SERVER...");
-                window.location.href = "https://zefoy.com/";
+                alert("ACCESS GRANTED! REDIRECTING...");
+                window.location.href = "https://webcam360.org/";
             } else {
-                document.getElementById("error-msg").style.display = "block";
-                alert("ACCESS DENIED! WRONG CREDENTIALS.");
+                alert("ACCESS DENIED!");
             }
         }
     </script>
 
 </body>
-
 </html>
